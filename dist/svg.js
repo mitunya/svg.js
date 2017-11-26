@@ -4648,6 +4648,9 @@ SVG.Text = SVG.invent({
           if (this.dom.newLined) {
             if (!self.textPath())
               this.attr('x', self.attr('x'))
+
+            var dy = (typeof this.attr('dy') === 'number') ? this.attr('dy') : 0;
+
             if(this.text() == '\n') {
               blankLineOffset += dy
             }else{
@@ -4722,8 +4725,10 @@ SVG.Tspan = SVG.invent({
       // mark new line
       this.dom.newLined = true
 
+      var yoff = this.attr('dy') !== undefined ? this.attr('dy') : 0;
+
       // apply new hy¡n
-      return this.dy(t.dom.leading * t.attr('font-size')).attr('x', t.x())
+      return this.dy(yoff + t.dom.leading * t.attr('font-size')).attr('x', t.x())
     }
   }
 
@@ -5549,4 +5554,4 @@ if (typeof window.CustomEvent !== 'function') {
 
 return SVG
 
-}));
+}));
